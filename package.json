@@ -1,0 +1,39 @@
+{
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress  --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "dependencies": {
+        "@vue/compiler-sfc": "^3.0.11",
+        "bootstrap": "^4.6.0",
+        "bootstrap-vue": "^2.21.2",
+        "es6-promise": "^4.2.8",
+        "jquery": "^3.6.0",
+        "popper.js": "^1.16.1",
+        "remove": "^0.1.5",
+        "vue": "^3.0.11",
+        "vue-loader": "^16.2.0",
+        "vue-router": "^4.0.8",
+        "vuex": "^4.0.1",
+        "webpack": "^5.38.1"
+    },
+    "devDependencies": {
+        "bootstrap": "^4.0.0",
+        "browser-sync": "^2.26.14",
+        "browser-sync-webpack-plugin": "^2.3.0",
+        "cross-env": "^7.0.3",
+        "jquery": "^3.2",
+        "laravel-mix": "^6.0.0-beta.17",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.15.2",
+        "sass-loader": "^8.0.0",
+        "vue-template-compiler": "^2.6.13",
+        "webpack-cli": "^4.7.0",
+        "webpack-dev-server": "^1.16.5"
+    }
+}
