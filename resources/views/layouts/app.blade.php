@@ -7,12 +7,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'HashRank') }}</title>
 
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <!-- Fonts -->
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     {{-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> --}}
@@ -22,7 +24,6 @@
     {{-- <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" /> --}}
 </head>
 <body>
-    <div class="container">
         {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
 
             <div class="container">
@@ -79,12 +80,11 @@
         </nav>  --}}
         <div id="app">
             @yield('content')
-            <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
-        </main>
-    </div>
+        </div>
+ 
     
 </body>
 <footer>
-   
+    <script src="{{ mix('js/app.js') }}" type="text/javascript"></script> 
 </footer>
 </html>
