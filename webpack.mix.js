@@ -11,6 +11,61 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').vue()
-    .sass('resources/sass/app.scss', 'public/css')
-    .sourceMaps();
+// mix.js('resources/js/app.js', 'public/js')
+//     .react()
+//     .sass('resources/sass/app.scss', 'public/css');
+const tailwindcss = require('tailwindcss');
+
+// mix.sass('resources/sass/app.scss', 'public/css'
+// ,[ 
+//    require('postcss-import'),
+//    require("tailwindcss"),
+//   //  require("autoprefixer"),
+// ]
+// )
+// .options({
+//     processCssUrls: false,
+//     postCss: [ tailwindcss('tailwind.config.js') ],
+//   });
+
+mix.ts('resources/js/react_app_typescript/src/index.tsx','public/js/react_app_typescript')
+    .react()
+    //  .sass('resources/sass/app.scss', 'public/css')
+    .postCss('resources/css/app.css', 'public/css'
+    // ,[ 
+    //   require('postcss-import'),
+    //   require("tailwindcss"),
+    //   //  require("autoprefixer"),
+    // ]
+    )
+    // .options({
+    //   processCssUrls: false,
+    //   postCss: [ tailwindcss('tailwind.config.js') ],
+    // })
+    .css('resources/js/react_app_typescript/src/index.css', 'public/css')
+    .webpackConfig({
+        module: {
+            rules: [
+              {
+                test: /\.(jsx|js)$/,
+                // include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/,
+                use: [{
+                  loader: 'babel-loader',
+                  options: {
+                    presets: [
+                      ['@babel/preset-env', {
+                        "targets": "defaults" 
+                      }],
+                      '@babel/preset-react'
+                    ]
+                  }
+                }]
+              }, 
+            ]
+          },
+          resolve: {
+            extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"]
+          }
+    }); 
+      

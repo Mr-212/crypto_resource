@@ -16,17 +16,23 @@ return [
     */
 
     'paths' => [
-        'api/*', 
-        'sanctum/csrf-cookie',
-        '/login',
-        '/logout',
+        '*',
+         'api/*', 
+         'sanctum/csrf-cookie',
+         '/login',
+         '/logout',
     ],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'http://localhost:8000',
+        'http://localhost:3000', 
+        'https://accounts.google.com',
+        '*'
+    ],
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => ["Google"],
 
     'allowed_headers' => ['*'],
 
@@ -35,5 +41,7 @@ return [
     'max_age' => 0,
 
     'supports_credentials' => true,
+
+    // 'Access-Control-Allow-Origin' => ['*'],
 
 ];

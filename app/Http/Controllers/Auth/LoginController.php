@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -41,19 +42,30 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $data = $request->validate([
-            'email' => 'email|required',
-            'password' => 'required'
+        //return dd($request->all());
+        // $data = $request->validate([
+        //     'email' => 'email|required',
+        //     'password' => 'required'
+        // ]);
+
+        $validator = Validator::make($request->all(),[
+                'email' => 'email|required',
+                'password' => 'required'
         ]);
 
-        if (!auth()->attempt($data)) {
+        if ($validator->fails())
+        {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+
+        if (!auth()->attempt($request->all())) {
             return response(['error_message' => 'Incorrect Details. 
             Please try again']);
         }
 
         $token = auth()->user()->createToken('API Token')->accessToken;
-
-        return response(['user' => auth()->user(), 'token' => $token]);
+        $data = ['user' => auth()->user(), 'token' => $token];
+        return response($data);
 
     }
 }

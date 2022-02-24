@@ -76,10 +76,12 @@ class RegisterController extends Controller
     
     public function register(Request $request)
     {
+
+        // var_dump($request->all());
         $validator = Validator::make($request->all(),[
             'name' => 'string|required',
             'email' => 'email|required|unique:users',
-            'password' => 'required'
+            'password' => 'required|confirmed'
         ]);
         //  dd($data);
 
@@ -89,10 +91,10 @@ class RegisterController extends Controller
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
             ]);
-
-            return response()->json($user);
+            
+            return response()->json(['user' => $user]);
         }else{
-            return response()->json(['errors'=>$validator->errors()]);
+            return response()->json(['errors' => $validator->errors()]);
         }
 
         

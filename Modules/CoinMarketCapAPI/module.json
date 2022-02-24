@@ -1,0 +1,13 @@
+{
+    "name": "CoinMarketCapAPI",
+    "alias": "coinmarketcapapi",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CoinMarketCapAPI\\Providers\\CoinMarketCapAPIServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

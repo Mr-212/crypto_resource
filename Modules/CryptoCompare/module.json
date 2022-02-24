@@ -1,0 +1,13 @@
+{
+    "name": "CryptoCompare",
+    "alias": "cryptocompare",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CryptoCompare\\Providers\\CryptoCompareServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

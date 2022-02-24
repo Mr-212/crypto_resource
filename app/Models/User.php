@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\HasApiTokens;
+use Laravel\Socialite\Contracts\User as ContractsUser;
+use Laravel\Socialite\Facades\Socialite;
 
 class User extends Authenticatable
 {
@@ -21,6 +25,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'google_id',
+        'facebook_id',
     ];
 
     /**
@@ -41,4 +47,50 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public static function loginSocialReguler(ContractsUser $user, $client){
+        if(isset($user->id)){
+            try{
+
+                return self::createUserWithSocialClient($user,$client);
+
+            }catch(Exception $e){
+                    return $e->getMessage();
+            }
+        }
+        return false;
+    }
+
+    public static function loginSocialStateless(ContractsUser $user, $client){
+       
+        try{
+                $user = self::createUserWithSocialClient($user,$client);
+                $token = $user->createToken('API_Client')->accessToken;
+                return ['user' => $user, 'token' => $token];
+        }
+        catch(Exception $e){
+            return $e->getMessage();
+        }
+
+    }
+
+    private static function createUserWithSocialClient(ContractsUser $user,$client){
+        try{
+            $newUser = SELF::updateOrCreate(['email'=>$user->email],[
+                $client.'_id'=> $user->id,
+                'email'=>$user->email,
+                'name' =>$user->name,
+                'password'=>'',
+            ]);
+
+            if($newUser){
+                return  Auth::loginUsingId($newUser->id);
+                    
+            }
+        }
+        catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
 }
